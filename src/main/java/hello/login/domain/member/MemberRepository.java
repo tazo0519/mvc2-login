@@ -24,7 +24,9 @@ public class MemberRepository {
     }
 
     public Optional<Member> findByLoginId(String loginId) {
-        return Optional.ofNullable(store.get(Long.parseLong(loginId)));
+        return findAll().stream()
+                .filter(m -> m.getLoginId().equals(loginId))
+                .findFirst();
     }
 
     public List<Member> findAll() {
